@@ -57,18 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private String mUsername;
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RC_SIGN_IN) {
-            if(resultCode == RESULT_OK) {
-                Toast.makeText(this, "Signed in!", Toast.LENGTH_SHORT).show();
-            } else if(resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Signed in canceled", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,9 +149,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
+    }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RC_SIGN_IN) {
+            if(resultCode == RESULT_OK) {
+                Toast.makeText(this, "Signed in!", Toast.LENGTH_SHORT).show();
+            } else if(resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Signed in canceled", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
     }
 
 
@@ -241,8 +240,9 @@ public class MainActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                 }
             };
+            messageDatabaseReference.addChildEventListener(childEventListener);
         }
-        messageDatabaseReference.addChildEventListener(childEventListener);
+
     }
 
 
