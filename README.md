@@ -1,1 +1,1 @@
-# friendly-chat-android
+# Friendly Chat Android
